@@ -1,0 +1,42 @@
+<h1>BURGERZ!</h1>
+
+<div id="pic">
+  <img src="assets/img/burger.jpg" height=200px>
+</div>
+
+<div id="col1">
+  <ul>
+    {{#each burgers}}
+      <li>
+        <p>
+          {{this.id}}. {{this.burger_name}}
+
+          <form action="/{{this.id}}?_method=PUT" method="POST">
+            <input type="hidden" name="devoured" value="true">
+            <button type="submit">Devour it!</button>
+          </form>
+        </p>
+      </li>
+    {{/each}}
+  </ul>
+</div>
+
+<div id="col2">
+  <ul>
+    {{#each burgers}}
+      <li>
+        <p>
+          {{this.id}}. {{this.burger_name}}
+        </p>
+      </li>
+    {{/each}}
+  </ul>
+</div>
+
+<div id="entry">
+  <h2>Add a Burger</h2>
+  <form method="POST" action="/" class="button-size">
+  	<textarea type="text" name="burger_name"></textarea>
+  	<button type="submit">Save Burger!</button>
+  </form>
+</div>
