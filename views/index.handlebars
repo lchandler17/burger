@@ -4,34 +4,42 @@
   <img src="assets/img/burger.jpg" height=200px>
 </div>
 
-<div id="col1">
-  <ul>
-    {{#each burgers}}
-      <li>
-        <p>
-          {{this.id}}. {{this.burger_name}}
+<div id="burgers">
 
-          <form action="/{{this.id}}?_method=PUT" method="POST">
-            <input type="hidden" name="devoured" value="true">
-            <button type="submit">Devour it!</button>
-          </form>
-        </p>
-      </li>
-    {{/each}}
-  </ul>
-</div>
+  <div id="col1">
+    <ul>
+      {{#each burgers}}
+        {{#unless this.devoured}}
+          <li>
+            <p>
+              {{this.id}}. {{this.burger_name}}
 
-<div id="col2">
-  <ul>
-    {{#each burgers}}
-      <li>
-        <p>
-          {{this.id}}. {{this.burger_name}}
-        </p>
-      </li>
-    {{/each}}
-  </ul>
-</div>
+              <form action="/{{this.id}}?_method=PUT" method="POST">
+                <input type="hidden" name="devoured" value="1">
+                <button type="submit">Devour it!</button>
+              </form>
+            </p>
+          </li>
+        {{/unless}}
+      {{/each}}
+    </ul>
+  </div>
+
+  <div id="col2">
+    <ul>
+      {{#each burgers}}
+        {{#if this.devoured}}
+          <li>
+            <p>
+              {{this.id}}. {{this.burger_name}}
+            </p>
+          </li>
+        {{/if}}
+      {{/each}}
+    </ul>
+  </div>
+
+</div> <!--burgers-->
 
 <div id="entry">
   <h2>Add a Burger</h2>

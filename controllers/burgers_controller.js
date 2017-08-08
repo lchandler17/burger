@@ -1,35 +1,36 @@
 var express = require('express');
 var router = express.Router();
 
-var burger = require('../models/burger.js');
+var connection = require('../config/connection.js')
+var burgers = require('../models/burger.js');
 
 router.get("/", function(req, res) {
-  connection.query("SELECT * FROM burgers;", function(err, data) {
-    if (err) {
-      throw err;
-    }
-
-    res.render("index", { burgers: data });
-
+  burgers.all(function(data) {
+  	var hbsObject = {
+  		burgers: data
+  	};
+  	res.render("index", hbsObject);
   });
 });
 
 router.post("/", function(req, res) {
-  connection.query("INSERT INTO burgers (burger_name) VALUES (?)", [req.body.burger_name], function(err, result) {
-    if (err) {
-      throw err;
-    }
-    res.redirect("/");
+  burgers.create([
+  		"burger_name", "devoured"
+  	], [
+  		req.body.burger_name, req.body.devoured
+  	], function() {
+  		res.redirect("/");
+  	});
+});
+
+router.put("/:id", function(req, res) {
+  var condition = "id = " + req.params.id;
+
+  burgers.update({
+  	devoured: req.body.devoured
+  }, condition, function() {
+  	res.redirect("/");
   });
 });
 
-router.put("/", function(req, res) {
-  connection.query("UPDATE burgers SET devoured = ? WHERE id = ?", [
-      req.body.devoured, req.body.id
-    ], function(err, result) {
-      if (err) {
-        throw err;
-      }
-      res.redirect("/");
-    });
-});
+module.exports = router;
