@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 
-var connection = require('../config/connection.js')
 var burgers = require('../models/burger.js');
 
 router.get("/", function(req, res) {
@@ -17,7 +16,7 @@ router.post("/", function(req, res) {
   burgers.create([
   		"burger_name", "devoured"
   	], [
-  		req.body.burger_name, req.body.devoured
+  		req.body.burger_name, 0
   	], function() {
   		res.redirect("/");
   	});

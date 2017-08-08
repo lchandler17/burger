@@ -11,6 +11,7 @@ h1 {
 
 h2 {
 	font-size: 26px;
+	margin: 10px;
 }
 
 img {
@@ -23,20 +24,22 @@ img {
 	display: block;
 	clear: all;
 	margin: 0 auto;
+	text-align: center;
 }
 
 #col1 {
 	color: black;
 	padding: 30px;
-	/*margin: 0 auto;*/
-	/*clear: none;*/
+	display: inline-block;
+	vertical-align: top;
+	line-height: 1.5;
 }
 
 #col2 {
 	color: grey;
 	padding: 30px;
-	/*margin: 0 auto;*/
-	/*clear: none;*/
+	display: inline-block;
+	line-height: 1.5;
 }
 
 #entry {
@@ -45,4 +48,9 @@ img {
 	text-align: center;
 	padding: 30px;
 	clear: all;
+}
+
+#entry button {
+	display: block;
+	margin: 0 auto;
 }
